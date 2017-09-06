@@ -8,7 +8,7 @@ con <- dbConnect(drv, dbname = "mimic",
                  host = "localhost", port = 5432,
                  user = "postgres", password = "")
 
-data <- dbGetQuery(con,"Select * from mimiciii.log_table")
+data <- dbGetQuery(con,"Select * from mimiciii.final_table")
 
 #fills empty cells with the average from that column
 data$avgbp[is.na(data$avgbp)] <- mean(data$avgbp,na.rm=T)
@@ -26,7 +26,7 @@ train <- data[1:48000,]
 test <- data[48001:49444,]
 
 #trains the logistic regression model
-model <- glm(expire ~ avgbp + avgmgdl + avgkul + avggdl + avgcmh2o + avgmeql + avgunits,family=binomial(link='logit'),data=train)
+model <- glm(expire ~.,family=binomial(link='logit'),data=train)
 
 #give a summary of the regression model
 summary(model)
