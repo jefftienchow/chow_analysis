@@ -27,3 +27,5 @@ Decision tree was slightly better at predicting mortality per hospital stay. Bot
 ## Future Work
 
 Test whether logistic regression performs better on patients that are similar to each other by performing logistic regression on N most similar patients with similarity defined as the cosine of the angle of two patient vectors. 
+
+[![DOI](https://zenodo.org/badge/102544623.svg)](https://zenodo.org/badge/latestdoi/102544623)
