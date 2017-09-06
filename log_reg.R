@@ -32,7 +32,7 @@ model <- glm(expire ~.,family=binomial(link='logit'),data=train)
 summary(model)
 
 #uses the model on the test data set
-fitted.results <- predict(model,newdata=subset(test,select=c(2,4,5,6,8,9,10)),type='response')
+fitted.results <- predict(model,newdata=subset(test,select=c(1,2,3,4,5,6,7,8,9,10)),type='response')
 
 #if the probability of death is >.5, say that the patient has died
 fitted.results <- ifelse(fitted.results > 0.5,1,0)
