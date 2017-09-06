@@ -1,11 +1,29 @@
-# Tutorials
+# Machine Learning Analysis on patient mortality by Jeff Chow
 
-This section provides a number of tutorials to provide guidance on using the MIMIC-III database. Tutorials are provided either as plain-text (`.md`), Jupyter Notebooks (`.ipynb`), or R Markdown files (`.Rmd`). If downloaded locally, the latter two tutorials are interactive, otherwise all tutorials can be viewed online.
+## General Project Description
 
-The tutorials currently available include:
+This folder has code that runs a logistic regression and creates a decision tree that predicts patient mortality from data from CHARTEVENTS. 
 
-* cohort-selection.ipynb - Overviews selecting a cohort of patients from MIMIC-III. Topics include calculating patient ages, service type, and creating exclusion criteria.
-* explore-items.Rmd - Exploring the data associated with various `itemid` in MIMIC-III, with specific focus on contrasting how there are two sources of data: CareVue and MetaVision.
-* sql-intro.md - A gentle introduction to using Structured Query Language (SQL) with the MIMIC-III database, covering key tables and important SQL keywords.
-* using_r_with_jupyter.ipynb - Demonstration of using a Jupyter Notebook with the R kernel to connect to a PostgreSQL database with MIMIC-III
-# chow_analysis
+## How to use
+
+#### Step 1: Using the CHARTEVENTS table from the MIMIC database, create a table for each unit of measurement that contains two columns, one with the HADM_ID and one with the VALUENUM corresponding to that unit of measurement. 
+
+#### Step 2: Average the values for each table where the HADM_ID is the same. 
+
+#### Step 3: Full join all of the tables together by id to create a table that contains a column for each unit and a column for the HADM_ID
+
+#### Step 4: Most columns contain too many empty cells. Keep the top 10 most-filled columns (not including the expire column). 
+
+#### Step 5: Run dec_tree.R to create a decision tree. Run log_reg.R to perform logistic regression. 
+
+## Results 
+
+### Accuracy with logistic regression is 89.47%. Accuracy with the decision tree is 89.54%. 
+
+## Conclusions
+
+### Decision tree was slightly better at predicting mortality per hospital stay. Both models performed with high accuracy (~90%). 
+
+## Future Work
+
+### Test whether logistic regression performs better on patients that are similar to each other by performing logistic regression on N most similar patients with similarity defined as the cosine of the angle of two patient vectors. 
